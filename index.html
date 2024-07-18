@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Cart API with alpine.js</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="pizza.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+
+</head>
+
+<body>
+    <div class="center">
+        <img src="pizza res.png" width="130" />
+        <h1 style="color: #5c0808; font-weight: bold;">Perfect Pizza</h1>
+      </div>
+    <div x-data="pizzaCart">
+        <div class="container">
+            <h1 x-text="title" style="text-align: center; color: #5c0808; font-weight: bold; margin-top: 50px;"></h1>
+            <div class="cart" x-cloak>
+                <div style="text-align: center; color: #5c0808; font-weight: bold; margin-top: 50px;">
+                    Username: <input type="text" placeholder="Enter Username" x-model="username">
+                    <button x-on:click="login" x-show="username" style=" margin-top: 10px; margin-left: 10px; background-color: #5c0808; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Login</button>
+                    <button x-on:click="logout" x-show="username && cartId" style=" margin-top: 10px; margin-left: 10px; background-color: #5c0808; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Logout</button>
+                </div>
+
+                <div x-show="cartId" style="text-align: center; color: #5c0808; font-weight: bold; margin-top: 50px;">
+                    Cart code: <span x-text="cartId" ></span>
+                </div>
+                <div x-show="cartTotal>0">
+                    <h2 style="text-align: center; color: #5c0808; font-weight: bold; margin-top: 50px;">Cart</h2>
+                    <div class="message" style="text-align:center;" x-text="message">message here</div>
+                    <table>
+                        <tr>
+                            <th>Flavour</th>
+                            <th>Size</th>
+                            <th>Price</th>
+                            <th>Qty</th>
+                            <th>Total</th>
+                        </tr>
+
+
+                        <template x-for="pizza in cartPizzas">
+                            <tr>
+                                <td x-text="pizza.flavour"></td>
+                                <td x-text="pizza.size"></td>
+                                <td x-text="pizza.price"></td>
+                                <td>
+                                    <button x-on:click="addPizzaToCart(pizza.id)" style="border: 1px solid #ccc; border-radius: 50%; width: 30px; height: 30px; background-color: #000; color: #fff; font-size: 20px; font-weight: bold;">+</button>
+                                    x<span x-text="pizza.qty"></span>
+                                    <button x-on:click="removePizzaFromCart(pizza.id)" style="border: 1px solid #ccc; border-radius: 50%; width: 30px; height: 30px; background-color: #000; color: #fff; font-size: 20px; font-weight: bold;">-</button>
+                                </td>
+                                <td x-text="pizza.total.toFixed(2)"></td>
+                            </tr>
+                        </template>
+
+                        <tr>
+                            <td colspan="3">Total</td>
+                            <td colspan="2" style="text-align: right">R <span x-text="cartTotal"> </span> </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">Pay Now</td>
+                            <td>
+                                <input x-model="paymentAmount" placeholder="Amount" type="text" sytle="width: 100px; height: 30px; border: 1px solid #ccc; border-radius: 5px; padding: 5px">
+                            </td>
+                            <td><button x-on:click="payForCart" style="cicler: 50px; width: 50px; height: 50px; background-color: #000; color: #fff; border: none; border-radius: 50%; font-size: 20px; font-weight: bold;">Pay</button></td>
+                        </tr>
+                    </table>
+ 
+                </div>
+
+
+                <h2 x-show="username && cartId" style="text-align: center; color: #5c0808; font-weight: bold; margin-top: 50px;">Pizzas</h2>
+                <div class="pizzas" x-show="username && cartId">
+                   
+                    <template x-for="pizza in pizzas" :key="pizza.id">
+                        <div class="pizza" :style="{ backgroundColor: pizza.bgColor }">
+                            <img src="pizza_two.png" alt="Pizza Icon" class="pizza-icon">
+                            <h5 x-text="pizza.flavour"></h5>
+                            <!-- <span x-text="pizza.id"></span> -->
+                            <span x-text="pizza.size"></span> @
+                            <strong>
+                                R<span x-text="pizza.price"></span>
+                            </strong>
+                            <div>
+                                <button class="btn" x-on:click="addPizzaToCart(pizza.id)" style="background-color: #7d1325d4; color: #fff; border: none; border-radius: 5px; padding: 5px 10px; font-size: 16px; font-weight: bold; cursor: pointer">Add to Cart</button>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="footer" x-show="username && cartId" x-cloak>
+            <div class="left">
+              <h2>Contact Details:</h2>
+              <div>
+                <div class="items">
+                  <img src="telephone-call.png" width="25" />
+                  <p>011 450 1235</p>
+                </div>
+      
+                <div class="items">
+                  <img src="facebook.png" width="25" />
+                  <img src="instagram.png" width="25" />
+                  <img src="twitter.png" width="25" />
+                  <p>perfect_pizza</p>
+                </div>
+                <div class="items">
+                  <img src="mail.png" width="25" />
+                  <p>info@perfectpizza.co.za</p>
+                </div>
+              </div>
+            </div>
+            <div class="right">
+              <h2>Opening Hours:</h2>
+              <p>08:00-17:00</p>
+              <div class="items">
+                <img src="maps-and-flags.png" width="25" />
+                <p>56 Bree Street</p>
+                <p>Johanesburg</p>
+                <p>2001</p>
+              </div>
+            </div>
+          </div>
+</body>
+
+</html>

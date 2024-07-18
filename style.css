@@ -1,0 +1,133 @@
+.pizzas {
+    display: grid;
+    gap: 1em;
+    padding: 1em;
+}
+
+.pizza-icon {
+    width: 100px;
+    height: 100px;
+    /* position: absolute; */
+    top: -25px;
+    left: 50%;
+
+}
+
+.center {
+    text-align: center;
+    border-radius: 1em;
+    padding: 1em;
+    margin: 0.5em;
+    margin-bottom: 0.5em;
+    background-image: url('BAKO.jpeg'); 
+    background-size:auto;
+}
+
+.pizza {
+    border: 1px solid;
+    padding: 1em;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+
+@media (min-width: 768px) {
+    .pizzas {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.container {
+    margin-right: 1em;
+    margin-left: 1em;
+}
+
+table {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    width: 60%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+.footer {
+    display: flex;
+    border: 5px solid;
+    background-color: #ffb703;
+    border-radius: 1em;
+    justify-content: space-between;
+    padding:auto;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  
+  .left {
+    text-align: left;
+  }
+  
+  .right {
+    text-align: left;
+  }
+
+.items {
+    display: flex: block;
+    flex-wrap: wrap;
+    justify-content:content;
+    align-items: center;
+}
+
+
+/* Styles for screens smaller than 600px */
+@media screen and (max-width: 600px) {
+    body {
+        background-color: lightblue;
+    }
+}
+
+/* Styles for screens between 600px and 900px */
+@media screen and (min-width: 600px) and (max-width: 900px) {
+    body {
+        background-color: lightgreen;
+    }
+}
+
+/* Styles for screens larger than 900px */
+@media screen and (min-width: 900px) {
+    body {
+        background-color: lightyellow;
+        .pizza-container {
+        display: flex;
+        }   
+    }
+}
+
+[x-cloak] { display: none !important; }
+
+
