@@ -8,21 +8,23 @@ document.addEventListener("alpine:init", () => {
         email: 'fentselebese@gmail.com',
         cartPizzas: [],
         cartTotal: 0.00,
-        paymentAmount: 0,
+        paymentAmount: '',
         message : '',
         change: 0,
         login() {
-          if(this.username.length >4){
+          if(this.username.length >2){
               localStorage['username'] = this.username;
              this.createCart();
+             this.isLoggedIn = true
           } else {
-            alert('Username must be at least 5 characters long');
+            alert('Username must be at least 3 characters long');
           }
         },
         logout() {
           if (confirm('Are you sure you want to logout?')){
             this.username = '';
             this.cartId = '';
+            this.isLoggedIn = false;
             localStorage['cartId'] = '';
             localStorage['username'] = '';
           }
@@ -88,12 +90,13 @@ document.addEventListener("alpine:init", () => {
           });
         },
   
-
+isLoggedIn: false,
 
         init() {
           const storedUsername = localStorage['username'];
           if (storedUsername) {
           this.username = storedUsername;
+          this.isLoggedIn = true
             }
 
           axios
@@ -157,7 +160,7 @@ document.addEventListener("alpine:init", () => {
                   this.paymentAmount = 0;
                   localStorage['cartId'] = '';
                   this.createCart();
-                 }, 10000);
+                 }, 6000);
               }
             })
 

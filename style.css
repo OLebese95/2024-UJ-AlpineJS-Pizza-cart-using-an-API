@@ -4,9 +4,9 @@
     padding: 1em;
 }
 
-.pizza-icon {
-    width: 100px;
-    height: 100px;
+.pizza-icon1 {
+    width: 150px;
+    height: 150px;
     /* position: absolute; */
     top: -25px;
     left: 50%;
@@ -23,12 +23,18 @@
     background-size:auto;
 }
 
+.pizzaFeature {
+    border: 1px solid;
+    padding: 1em;
+    border-radius: 5px;
+    position: relative;
+}
+
 .pizza {
     border: 1px solid;
     padding: 1em;
     border-radius: 5px;
-    background-color: #f8f8f8;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
     position: relative;
 }
 
@@ -37,6 +43,26 @@
     .pizzas {
         grid-template-columns: repeat(3, 1fr);
     }
+}
+
+.capitalize-text {
+    text-transform: capitalize;
+}
+
+.pizzaFeature:nth-child(odd) {
+    background-color: blue;
+}
+
+.pizzaFeature:nth-child(even) {
+    background-color: green;
+}
+
+.pizza:nth-child(odd) {
+    background-color: blue;
+}
+
+.pizza:nth-child(even) {
+    background-color: green;
 }
 
 .container {
@@ -130,4 +156,24 @@ tr:hover {
 
 [x-cloak] { display: none !important; }
 
-
+.pizza-info .pizzas {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Create four equal columns */
+    gap: 15px; 
+   
+}
+.pizza-info .pizza {
+    display: grid;
+    grid-template-columns: auto 1fr 1fr auto; /* Define the layout of the columns */
+    align-items: center;
+    gap: 10px; /* Adjust spacing between items as needed */
+    border: 1px solid #ddd;
+    padding: 1em;
+    border-radius: 5px;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+.pizza-icon {
+    width: 100px; /* Adjust size as needed */
+    height: auto;
+}
