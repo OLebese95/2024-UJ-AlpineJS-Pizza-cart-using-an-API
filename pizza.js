@@ -10,6 +10,7 @@ document.addEventListener("alpine:init", () => {
         cartTotal: 0.00,
         paymentAmount: 0,
         message : '',
+        change: 0,
         login() {
           if(this.username.length >4){
               localStorage['username'] = this.username;
@@ -134,18 +135,29 @@ document.addEventListener("alpine:init", () => {
             .then(result => {
               if (result.data.status == 'failure') {
                 this.message = result.data.message;
-                setTimeout(()=> this.message = '', 3000);
+                setTimeout(()=> (this.message = ''), 3000);
               } else {
-                  this.message = 'Payment Successful';
+                  this.message = 'Payment Successful!';
+            
+        
+                  if (Number(this.paymentAmount) >= Number(this.cartTotal)) { 
+                 
+                    this.change = this.paymentAmount - this.cartTotal;
+                  
+                  } else {
+                    this.change = 0;
+                  }
+                  
                 setTimeout(()=> {
                   this.message = '';
+                  this.change = 0;
                   this.cartPizzas = [];
                   this.cartTotal = 0.00
                   this.cartId = ''
                   this.paymentAmount = 0;
                   localStorage['cartId'] = '';
                   this.createCart();
-                 }, 3000);
+                 }, 10000);
               }
             })
 

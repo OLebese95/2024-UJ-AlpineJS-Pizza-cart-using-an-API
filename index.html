@@ -24,7 +24,9 @@
             <h1 x-text="title" style="text-align: center; color: #5c0808; font-weight: bold; margin-top: 50px;"></h1>
             <div class="cart" x-cloak>
                 <div style="text-align: center; color: #5c0808; font-weight: bold; margin-top: 50px;">
+                    <!-- <div x-show="!cartId"> -->
                     Username: <input type="text" placeholder="Enter Username" x-model="username">
+                    <!-- </div> -->
                     <button x-on:click="login" x-show="username" style=" margin-top: 10px; margin-left: 10px; background-color: #5c0808; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Login</button>
                     <button x-on:click="logout" x-show="username && cartId" style=" margin-top: 10px; margin-left: 10px; background-color: #5c0808; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Logout</button>
                 </div>
@@ -35,6 +37,7 @@
                 <div x-show="cartTotal>0">
                     <h2 style="text-align: center; color: #5c0808; font-weight: bold; margin-top: 50px;">Cart</h2>
                     <div class="message" style="text-align:center;" x-text="message">message here</div>
+                    <div x-show="change" style="text-align:center;" x-text="'Here is Your Change: R' + change.toFixed(2)"></div>
                     <table>
                         <tr>
                             <th>Flavour</th>
@@ -83,7 +86,7 @@
                             <img src="pizza_two.png" alt="Pizza Icon" class="pizza-icon">
                             <h5 x-text="pizza.flavour"></h5>
                             <!-- <span x-text="pizza.id"></span> -->
-                            <span x-text="pizza.size"></span> @
+                            <span x-text="pizza.size"></span> 
                             <strong>
                                 R<span x-text="pizza.price"></span>
                             </strong>
