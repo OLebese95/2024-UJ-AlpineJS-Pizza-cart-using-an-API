@@ -25,8 +25,10 @@ document.addEventListener("alpine:init", () => {
             this.username = '';
             this.cartId = '';
             this.isLoggedIn = false;
-            localStorage['cartId'] = '';
-            localStorage['username'] = '';
+            this.cartPizzas = [];
+            this.cartTotal = 0.00;
+            localStorage.clear();
+        
           }
         },
         
@@ -155,8 +157,8 @@ isLoggedIn: false,
                   this.message = '';
                   this.change = 0;
                   this.cartPizzas = [];
-                  this.cartTotal = 0.00
-                  this.cartId = ''
+                  this.cartTotal = 0.00;
+                  this.cartId = '';
                   this.paymentAmount = 0;
                   localStorage['cartId'] = '';
                   this.createCart();
