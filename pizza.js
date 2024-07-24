@@ -146,7 +146,10 @@ document.addEventListener("alpine:init", () => {
             });
           }
         }
+        
         this.isLoggedIn = false;
+
+
         axios
           .get('https://pizza-api.projectcodex.net/api/pizzas')
           .then(result => {

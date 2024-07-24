@@ -85,7 +85,6 @@
                                     <div class="order-history-item">
                                         <p><strong>Username:</strong> <span x-text="username"></span></p>
                                         <p><strong>Cart ID:</strong> <span x-text="order.cartId"></span></p>
-                                        
                                         <table class="order-table">
                                             <thead>
                                                 <tr>
@@ -194,7 +193,7 @@
 
 
                     <div>
-                        <h2 x-show="cartId"
+                        <h2 x-show="username && cartId"
                             style="text-align: center; color: #5c0808; font-weight: bold; margin-top: 50px;">Featured
                             Pizzas
                         </h2>
