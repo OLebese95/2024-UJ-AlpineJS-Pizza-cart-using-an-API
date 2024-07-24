@@ -247,3 +247,21 @@
     text-align: center;
     margin-top: 10px;
   }
+
+  .noOrderMessage {
+    color: #dc3545; 
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .change {
+    color: #daae1e; 
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  
