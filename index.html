@@ -10,167 +10,274 @@
     <script src="//unpkg.com/alpinejs" defer></script>
     <script src="pizza.js"></script>
     <link rel="stylesheet" href="style.css">
-
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
+
+
 <body>
-    <div class="center">
-        <img src="pizza res.png" width="130" />
-        <h1 style="color: #5c0808; font-weight: bold;">Perfect Pizza</h1>
-    </div>
-    <div x-data="pizzaCart">
-        <div class="container">
-            <h1 x-text="title" style="text-align: center; color: #5c0808; font-weight: bold;"></h1>
-            <div class="cart" x-cloak>
-                <div style="text-align: center; color: #5c0808; font-weight: bold;">
-                    <h3>Username</h3>
-                    <p x-text="username"></p>
-                    <input x-show="!isLoggedIn" type="text" placeholder="Enter Username" x-model="username">
-                    <button x-on:click="login" x-show="!isLoggedIn && username"
-                        style=" margin-top: 10px; margin-left: 10px; background-color: #5c0808; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Login</button>
-                    <button x-on:click="logout" x-show="isLoggedIn"
-                        style=" margin-top: 10px; margin-left: 10px; background-color: #5c0808; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Logout</button>
-                </div>
+    <div class="container">
+        <div class="center">
+            <img src="pizza res.png" width="130" />
+            <h1 style="color: #5c0808; font-weight: bold;">Perfect Pizza</h1>
+        </div>
 
-                <div x-show="cartId" style="text-align: center; color: #5c0808; font-weight: bold; margin-top: 50px;">
-                    Cart code: <span x-text="cartId"></span>
-                </div>
-                <div x-show="cartTotal>0">
-                    <h2 style="text-align: center; color: #5c0808; font-weight: bold; margin-top: 10px;">Cart</h2>
-                    <div class="message" style="text-align:center; color: #fa9e09;" x-text="message">message here</div>
-                    <div x-show="change" style="text-align:center; color: #000000;"
-                        x-text="'Here is Your Change: R' + change.toFixed(2)"></div>
-                    <table>
-                        <tr>
-                            <th>Flavour</th>
-                            <th>Size</th>
-                            <th>Price</th>
-                            <th>Qty</th>
-                            <th>Total</th>
-                        </tr>
+        <div x-data="pizzaCart">
+            <div class="container">
+                <!-- <h1 x-text="title" style="text-align: center; color: #5c0808; font-weight: bold;"></h1> -->
+                <nav x-show="isLoggedIn" class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <div class="container">
+                        <div class="d-flex justify-content-between w-100">
+                           
+                            <span class="navbar-text text-white font-weight-bold" x-show="username">
+                                <span x-text="'Username: ' + username"></span>
+                            </span>
 
+                           
+                            <span class="navbar-text text-white font-weight-bold mx-3" x-show="cartId">
+                                <span x-text="'Cart Code: ' + cartId"></span>
+                            </span>
 
-                        <template x-for="pizza in cartPizzas">
-                            <tr>
-                                <td x-text="pizza.flavour"></td>
-                                <td x-text="pizza.size"></td>
-                                <td x-text="pizza.price"></td>
-                                <td>
-                                    <button x-on:click="addPizzaToCart(pizza.id)"
-                                        style="border: 1px solid #ccc; border-radius: 50%; width: 30px; height: 30px; background-color: #000; color: #fff; font-size: 20px; font-weight: bold;">+</button>
-                                    x<span x-text="pizza.qty"></span>
-                                    <button x-on:click="removePizzaFromCart(pizza.id)"
-                                        style="border: 1px solid #ccc; border-radius: 50%; width: 30px; height: 30px; background-color: #000; color: #fff; font-size: 20px; font-weight: bold;">-</button>
-                                </td>
-                                <td x-text="pizza.total.toFixed(2)"></td>
-                            </tr>
-                        </template>
+                           
+                            <button class="btn btn-info" x-on:click="showHistory = !showHistory"
+                                x-show="username && cartId">
+                                <span x-text="showHistory ? 'Hide Historical Orders' : 'View Historical Orders'"></span>
+                            </button>
 
-                        <tr>
-                            <td colspan="3">Total</td>
-                            <td colspan="2" style="text-align: right">R <span x-text="cartTotal"> </span> </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">Pay Now</td>
-                            <td>
-                                <input x-model="paymentAmount" placeholder="Amount" type="text"
-                                    sytle="width: 100px; height: 30px; border: 1px solid #ccc; border-radius: 5px; padding: 5px">
-                            </td>
-                            <td><button x-on:click="payForCart"
-                                    style="cicler: 50px; width: 50px; height: 50px; background-color: #000; color: #fff; border: none; border-radius: 50%; font-size: 20px; font-weight: bold;">Pay</button>
-                            </td>
-                        </tr>
-                    </table>
+                           
+                            <button class="btn" x-on:click="logout" x-show="isLoggedIn"
+                                style="background-color: #5c0808; color: white;">
+                                Logout
+                            </button>
+                        </div>
+                    </div>
+                </nav>
+                <div class="cart" x-cloak>
+                    <div x-show="!isLoggedIn"
+                        style="text-align: center; color: #5c0808; font-weight: bold; margin-top:10em;">
+                        <h3 x-show="!isLoggedIn">Please Enter Your Username</h3>
 
-                </div>
+                        <input x-show="!isLoggedIn" type="text" placeholder="Enter Username" x-model="username">
+                        <button x-on:click="login" x-show="!isLoggedIn && username"
+                            style="margin-top: 10px; margin-left: 10px; background-color: #0b2ab7; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                            Login
+                        </button>
+
+                    </div>
 
 
-                <div>
-                    <h2 x-show="username && cartId"
-                        style="text-align: center; color: #5c0808; font-weight: bold; margin-top: 50px;">Featured Pizzas
-                    </h2>
-                    <div x-show="username && cartId">
-                        <template x-if="pizzas.length > 0">
-                            <div class="pizzas">
-                                <template x-for="size in ['large', 'medium', 'small']" :key="size">
-                                    <div class="pizzaFeature" x-show="pizzas.filter(p => p.size === size)[0]">
-                                        <template x-if="pizzas.filter(p => p.size === size)[0]">
-                                            <div>
-                                                <img src="pizza_two.png" alt="Pizza Icon" class="pizza-icon1">
-                                                <h3 x-text="pizzas.filter(p => p.size === size)[0].flavour"></h3>
-                                                <h4 x-text="`${pizzas.filter(p => p.size === size)[0].size} Pizza`"
-                                                    class="capitalize-text"></h4>
-                                                <h5 x-text="'R ' + pizzas.filter(p => p.size === size)[0].price"></h5>
-                                                <div>
-                                                    <button class="btn"
-                                                        x-on:click="addPizzaToCart(pizzas.filter(p => p.size === size)[0].id)"
-                                                        style="background-color: #7d1325d4; color: #fff; border: none; border-radius: 5px; padding: 5px 10px; font-size: 16px; font-weight: bold; cursor: pointer">Buy</button>
-                                                </div>
-                                            </div>
-                                        </template>
+                    
+                    <div x-show="showHistory" class="order-history-container">
+                        <h2 style="text-align: center; color: #5c0808; font-weight: bold; margin-top: 10px;">Order
+                            History</h2>
+                        <template x-if="orderHistory.length > 0">
+                            <div class="order-history-list">
+                                <template x-for="order in orderHistory" :key="order.cartId">
+                                    <div class="order-history-item">
+                                        <p><strong>Username:</strong> <span x-text="username"></span></p>
+                                        <p><strong>Cart ID:</strong> <span x-text="order.cartId"></span></p>
+                                        <table class="order-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Flavour</th>
+                                                    <th>Size</th>
+                                                    <th>Quantity</th>
+                                                    <th>Price</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <template x-for="pizza in order.pizzas" :key="pizza.id">
+                                                    <tr>
+                                                        <td x-text="pizza.flavour"></td>
+                                                        <td x-text="pizza.size" class="capitalize-text"></td>
+                                                        <td x-text="pizza.quantity"></td>
+                                                        <td x-text="'R ' + pizza.price.toFixed(2)"></td>
+                                                        <td x-text="'R ' + (pizza.price * pizza.quantity).toFixed(2)">
+                                                        </td>
+                                                    </tr>
+                                                </template>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="4" class="total-label">Total Amount:</td>
+                                                    <td class="total-value" x-text="'R ' + order.total.toFixed(2)"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="4" class="total-label">Amount Paid:</td>
+                                                    <td class="total-value"
+                                                        x-text="'R ' + order.paymentAmount.toFixed(2)">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="4" class="total-label">Change:</td>
+                                                    <td class="total-value" x-text="'R ' + order.change.toFixed(2)">
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                        
+                                        <button x-on:click="orderAgain(order)"
+                                            style="background-color: #5c0808; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 10px;">
+                                            Order Again
+                                        </button>
                                     </div>
                                 </template>
                             </div>
                         </template>
+                        <p x-show="orderHistory.length === 0">No order history available.</p>
+                    </div>
+
+
+
+
+
+
+
+
+                    <div x-show="cartTotal > 0">
+                        <h2 style="text-align: center; color: #5c0808; font-weight: bold; margin-top: 10px;">Cart</h2>
+                        <div class="message"
+                            :class="message.includes('Successful') ? 'success-message' : 'error-message'"
+                            x-text="message"></div>
+                        <div x-show="change" style="text-align:center; color: #000000;"
+                            x-text="'Here is Your Change: R ' + change.toFixed(2)"></div>
+                        <table class="cart-table">
+                            <thead>
+                                <tr>
+                                    <th>Flavour</th>
+                                    <th>Size</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template x-for="pizza in cartPizzas">
+                                    <tr>
+                                        <td x-text="pizza.flavour"></td>
+                                        <td x-text="pizza.size" class="capitalize-text"></td>
+                                        <td x-text="pizza.price"></td>
+                                        <td>
+                                            <button x-on:click="addPizzaToCart(pizza.id)"
+                                            style="background-color: #5c0808; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; margin-top: 5px;">+</button>
+                                            x<span x-text="pizza.qty"></span>
+                                            <button x-on:click="removePizzaFromCart(pizza.id)"
+                                            style="background-color: #5c0808; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; margin-top: 5px;">-</button>
+                                        </td>
+                                        <td x-text="pizza.total.toFixed(2)"></td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3">Total</td>
+                                    <td colspan="2" style="text-align: right">R <span x-text="cartTotal"></span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">Pay Now</td>
+                                    <td>
+                                        <input x-model="paymentAmount" placeholder="Amount" type="text"
+                                            style="width: 100px; height: 30px; border: 1px solid #ccc; border-radius: 5px; padding: 5px;">
+                                    </td>
+                                    <td><button x-on:click="payForCart"
+                                        style="background-color: #5c0808; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 10px;">Pay</button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+
+                    <div>
+                        <h2 x-show="username && cartId"
+                            style="text-align: center; color: #5c0808; font-weight: bold; margin-top: 50px;">Featured
+                            Pizzas
+                        </h2>
+                        <div x-show="username && cartId">
+                            <template x-if="pizzas.length > 0">
+                                <div class="pizzas">
+                                    <template x-for="size in ['large', 'medium', 'small']" :key="size">
+                                        <div class="pizzaFeature" x-show="pizzas.some(p => p.size === size)">
+                                            <template x-if="pizzas.some(p => p.size === size)">
+                                                <div>
+                                                    <img src="pizza_two.png" alt="Pizza Icon" class="pizza-icon1">
+                                                    <h3 x-text="pizzas.find(p => p.size === size).flavour"></h3>
+                                                    <h4 x-text="`${pizzas.find(p => p.size === size).size} Pizza`"
+                                                        class="capitalize-text"></h4>
+                                                    <h5 x-text="'R ' + pizzas.find(p => p.size === size).price"></h5>
+                                                    <div>
+                                                        <button class="btn"
+                                                            x-on:click="addPizzaToCart(pizzas.find(p => p.size === size).id)"
+                                                            style="background-color: #7d1325d4; color: #fff; border: none; border-radius: 5px; padding: 5px 10px; font-size: 16px; font-weight: bold; cursor: pointer">Buy</button>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
                     </div>
                 </div>
-            </div>
 
 
-
-            <div class="pizza-info">
-                <h2 x-show="username && cartId"
-                    style="text-align: center; color: #5c0808; font-weight: bold; margin-top: 50px;">Pizzas</h2>
-                <div x-show="username && cartId">
-                    <template x-for="(pizza, index) in pizzas" :key="pizza.id">
-                        <div class="pizza" :class="{'odd': index % 2 === 0, 'even': index % 2 !== 0}">
-                            <img src="pizza_two.png" alt="Pizza Icon" class="pizza-icon">
-                            <h3 x-text="`${pizza.size} ${pizza.flavour} Pizza`" class="capitalize-text"></h3>
-                            <h3 x-text="'R ' + pizza.price"></h3>
-                            <div>
-                                <button class="btn" x-on:click="addPizzaToCart(pizza.id)"
+                <div class="pizza-info">
+                    <h2 x-show="username && cartId"
+                        style="text-align: center; color: #5c0808; font-weight: bold; margin-top: 50px;">Pizzas</h2>
+                    <div x-show="username && cartId">
+                        <template x-for="(pizza, index) in pizzas" :key="pizza.id">
+                            <div class="pizza" :class="{'odd': index % 2 === 0, 'even': index % 2 !== 0}">
+                                <img src="pizza_two.png" alt="Pizza Icon" class="pizza-icon">
+                                <h3 x-text="pizza.flavour"></h3>
+                                <h4 x-text="pizza.size" class="capitalize-text"></h4>
+                                <h5 x-text="'R ' + pizza.price"></h5>
+                                <div>
+                                    <button x-on:click="addPizzaToCart(pizza.id)"
                                     style="background-color: #7d1325d4; color: #fff; border: none; border-radius: 5px; padding: 5px 10px; font-size: 16px; font-weight: bold; cursor: pointer">Buy</button>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+
+
+                <div class="footer" x-show="username && cartId" x-cloak>
+                    <div class="left">
+                        <h2>Contact Details:</h2>
+                        <div>
+                            <div class="items">
+                                <img src="telephone-call.png" width="25" />
+                                <p>011 450 1235</p>
+                            </div>
+
+                            <div class="items">
+                                <img src="facebook.png" width="25" />
+                                <img src="instagram.png" width="25" />
+                                <img src="twitter.png" width="25" />
+                                <p>perfect_pizza</p>
+                            </div>
+                            <div class="items">
+                                <img src="mail.png" width="25" />
+                                <p>info@perfectpizza.co.za</p>
                             </div>
                         </div>
-                    </template>
-                </div>
-            </div>
-
-
-
-            <div class="footer" x-show="username && cartId" x-cloak>
-                <div class="left">
-                    <h2>Contact Details:</h2>
-                    <div>
+                    </div>
+                    <div class="right">
+                        <h2>Opening Hours:</h2>
+                        <p>08:00-17:00</p>
                         <div class="items">
-                            <img src="telephone-call.png" width="25" />
-                            <p>011 450 1235</p>
-                        </div>
-
-                        <div class="items">
-                            <img src="facebook.png" width="25" />
-                            <img src="instagram.png" width="25" />
-                            <img src="twitter.png" width="25" />
-                            <p>perfect_pizza</p>
-                        </div>
-                        <div class="items">
-                            <img src="mail.png" width="25" />
-                            <p>info@perfectpizza.co.za</p>
+                            <img src="maps-and-flags.png" width="25" />
+                            <p>56 Bree Street</p>
+                            <p>Johanesburg</p>
+                            <p>2001</p>
                         </div>
                     </div>
                 </div>
-                <div class="right">
-                    <h2>Opening Hours:</h2>
-                    <p>08:00-17:00</p>
-                    <div class="items">
-                        <img src="maps-and-flags.png" width="25" />
-                        <p>56 Bree Street</p>
-                        <p>Johanesburg</p>
-                        <p>2001</p>
-                    </div>
-                </div>
-            </div>
 </body>
 
 </html>
