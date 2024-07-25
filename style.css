@@ -50,37 +50,35 @@
 }
 
 .pizzaFeature:nth-child(odd) {
-    background-color: blue;
+    background-color: #f5f5f5; 
 }
 
 .pizzaFeature:nth-child(even) {
-    background-color: green;
+    background-color: #fffff0; 
 }
 
 .pizza:nth-child(odd) {
-    background-color: blue;
+    background-color: #f7c948; 
 }
 
 .pizza:nth-child(even) {
-    background-color: green;
+    background-color: #dcdcdc; 
 }
 
-.container {
-    margin-right: 1em;
-    margin-left: 1em;
-}
 
 .cart-table {
     width: 100%;
+    justify-content: center;
+
     border-collapse: collapse;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .cart-table th, .cart-table td {
     border: 1px solid #ddd;
     padding: 8px;
-    text-align: left;
+    text-align: center;
 }
 
 .cart-table th {
@@ -89,7 +87,7 @@
 }
 
 .cart-table tfoot .total-label {
-    text-align: right;
+    text-align: center;
     font-weight: bold;
     background-color: #f9f9f9;
 }
@@ -100,10 +98,8 @@
 }
 
 .footer {
-    display: flex;
-    border: 5px solid;
     background-color: #ffb703;
-    border-radius: 1em;
+    border-radius: 0.5em;
     justify-content: space-between;
     padding:auto;
     padding-left: 1em;
@@ -112,20 +108,7 @@
     margin-bottom: 0.5em;
   }
   
-  .left {
-    text-align: left;
-  }
-  
-  .right {
-    text-align: left;
-  }
 
-.items {
-    display: flex: block;
-    flex-wrap: wrap;
-    justify-content:content;
-    align-items: center;
-}
 
 
 /* Styles for screens smaller than 600px */
@@ -133,6 +116,8 @@
     body {
         background-color: lightblue;
     }
+    cart-table {
+        width: 5%;
 }
 
 /* Styles for screens between 600px and 900px */
@@ -148,7 +133,7 @@
         background-color: lightyellow;
         .pizza-container {
         display: flex;
-        }   
+        }  
     }
 }
 
@@ -162,8 +147,7 @@
 }
 .pizza-info .pizza {
     display: grid;
-    grid-template-columns: auto 1fr 1fr auto; /* Define the layout of the columns */
-    align-items: center;
+    grid-template-columns: auto 1fr 1fr auto; 
     gap: 10px; 
     border: 1px solid #ddd;
     padding: 1em;
@@ -173,7 +157,7 @@
 }
 .pizza-icon {
     width: 100px; 
-    height: auto;
+    height: 100px;
 }
 
 
@@ -191,7 +175,7 @@
   }
 
   .order-history-item {
-    border: 1px solid #5c0808;
+    /* border: 1px solid #5c0808; */
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 10px;
@@ -264,4 +248,23 @@
     margin-top: 10px;
   }
 
-  
+.nav-item {
+    margin-bottom: 10px;
+}
+
+.nav-item .btn {
+    width: 100%;
+    text-align: left;
+}
+
+
+.btn-sm {
+    height: auto;
+    padding: 5px 10px;
+}
+
+
+.navbar-nav .nav-item {
+    margin-bottom: 10px;
+}
+

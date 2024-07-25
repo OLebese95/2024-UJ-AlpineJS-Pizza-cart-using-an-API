@@ -52,13 +52,12 @@ document.addEventListener("alpine:init", () => {
         });
       },
 
-
       logout() {
         if (confirm('Are you sure you want to logout?')) {
           this.saveHistory(); 
           this.username = '';
           this.cartId = '';
-      this.isLoggedIn = false;
+          this.isLoggedIn = false;
           this.cartPizzas = [];
           this.cartTotal = 0.00;
           localStorage.removeItem('cartId'); 
@@ -146,10 +145,7 @@ document.addEventListener("alpine:init", () => {
             });
           }
         }
-        
         this.isLoggedIn = false;
-
-
         axios
           .get('https://pizza-api.projectcodex.net/api/pizzas')
           .then(result => {
