@@ -1,3 +1,27 @@
+.success-message {
+    color: #28a745; 
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.error-message {
+    color: #dc3545; 
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.change {
+    color: #daae1e; 
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 10px;
+}
+
 .pizzas {
     display: grid;
     gap: 1em;
@@ -7,10 +31,8 @@
 .pizza-icon1 {
     width: 150px;
     height: 150px;
-    /* position: absolute; */
     top: -25px;
     left: 50%;
-
 }
 
 .center {
@@ -38,7 +60,6 @@
     position: relative;
 }
 
-
 @media (min-width: 768px) {
     .pizzas {
         grid-template-columns: repeat(3, 1fr);
@@ -65,11 +86,9 @@
     background-color: #dcdcdc; 
 }
 
-
 .cart-table {
     width: 100%;
     justify-content: center;
-
     border-collapse: collapse;
     margin-top: 10px;
     margin-bottom: 5px;
@@ -106,34 +125,29 @@
     padding-right: 1em;
     margin: 0.5em;
     margin-bottom: 0.5em;
-  }
-  
+}
 
-
-
-/* Styles for screens smaller than 600px */
 @media screen and (max-width: 600px) {
     body {
         background-color: lightblue;
     }
-    cart-table {
-        width: 5%;
+    .cart-table {
+        width: 100%;
+    }
 }
 
-/* Styles for screens between 600px and 900px */
 @media screen and (min-width: 600px) and (max-width: 900px) {
     body {
         background-color: lightgreen;
     }
 }
 
-/* Styles for screens larger than 900px */
 @media screen and (min-width: 900px) {
     body {
         background-color: lightyellow;
-        .pizza-container {
+    }
+    .pizza-container {
         display: flex;
-        }  
     }
 }
 
@@ -143,8 +157,8 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr); 
     gap: 15px; 
-   
 }
+
 .pizza-info .pizza {
     display: grid;
     grid-template-columns: auto 1fr 1fr auto; 
@@ -155,98 +169,63 @@
     margin-left: 1em;
     margin-right: 1em;
 }
+
 .pizza-icon {
     width: 100px; 
     height: 100px;
 }
 
-
 .order-history-container {
     text-align: center;
     color: #030303;
-    
     margin-top: 20px;
-  }
+}
 
-  .order-history-list {
+.order-history-list {
     margin: 0 auto;
     width: 80%;
     text-align: left;
-  }
+}
 
-  .order-history-item {
-    /* border: 1px solid #5c0808; */
+.order-history-item {
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 10px;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+}
 
-  .order-table {
+.order-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
-  }
+}
 
-  .order-table th, .order-table td {
+.order-table th, .order-table td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
-  }
+}
 
-  .order-table th {
+.order-table th {
     background-color: #f2f2f2;
     color: #333;
-  }
+}
 
-  .order-table tfoot .total-label {
+.order-table tfoot .total-label {
     text-align: left;
     font-weight: bold;
     background-color: #f9f9f9;
-  }
+}
 
-  .order-table tfoot .total-value {
-   
+.order-table tfoot .total-value {
+    font-weight: bold;
     background-color: #f9f9f9;
-  }
+}
 
-  .order-history-item p {
+.order-history-item p {
     margin: 5px 0;
-  }
-
-
-.success-message {
-    color: #28a745; 
-    font-weight: bold;
-    font-size: 1.2em;
-    text-align: center;
-    margin-top: 10px;
-  }
-  
-  .error-message {
-    color: #dc3545; 
-    font-weight: bold;
-    font-size: 1.2em;
-    text-align: center;
-    margin-top: 10px;
-  }
-
-  .noOrderMessage {
-    color: #dc3545; 
-    font-weight: bold;
-    font-size: 1.2em;
-    text-align: center;
-    margin-top: 10px;
-  }
-
-  .change {
-    color: #daae1e; 
-    font-weight: bold;
-    font-size: 1.2em;
-    text-align: center;
-    margin-top: 10px;
-  }
+}
 
 .nav-item {
     margin-bottom: 10px;
@@ -257,14 +236,11 @@
     text-align: left;
 }
 
-
 .btn-sm {
     height: auto;
     padding: 5px 10px;
 }
 
-
 .navbar-nav .nav-item {
     margin-bottom: 10px;
 }
-

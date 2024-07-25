@@ -135,11 +135,8 @@
 
                     <div x-show="cartTotal > 0">
                         <h2 style="text-align: center; color: #5c0808; font-weight: bold; margin-top: 10px;">Cart</h2>
-                        <div class="message"
-                            :class="message.includes('Successful') ? 'success-message' : 'error-message'"
-                            x-text="message"></div>
-                        <div x-show="change" style="text-align:center;  font-weight: bold; color: #000000;"
-                            x-text="'Here is Your Change: R ' + change.toFixed(2)"></div>
+                        <div class="message" :class="message.includes('Successful') ? 'success-message' : 'error-message'" x-text="message"></div>
+                        <div class="change" x-show="change" x-text="'Here is Your Change: R ' + change.toFixed(2)"></div>
                         <table class="cart-table">
                             <thead>
                                 <tr>
@@ -159,7 +156,7 @@
                                         <td>
                                             <button x-on:click="addPizzaToCart(pizza.id)"
                                                 style="background-color: #5c0808; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; margin-top: 5px;">+</button>
-                                            x<span x-text="pizza.qty"></span>
+                                            <span x-text="pizza.qty"></span>
                                             <button x-on:click="removePizzaFromCart(pizza.id)"
                                                 style="background-color: #5c0808; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; margin-top: 5px;">-</button>
                                         </td>
@@ -185,6 +182,7 @@
                             </tfoot>
                         </table>
                     </div>
+                    
 
 
                     <div>
