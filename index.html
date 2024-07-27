@@ -53,10 +53,10 @@
                                     </span>
                                 </div>
                                 <div class="col-12 col-lg-4 text-lg-right text-center">
-                                    <button class="btn btn-info btn-sm mx-2" x-on:click="showHistory = !showHistory" x-show="username && cartId">
+                                    <button class="btn btn-info btn-sm mx-2" x-on:click="toggleHistory" x-show="username && cartId">
                                         <span x-text="showHistory ? 'Hide Orders' : 'View Orders'"></span>
                                     </button>
-                                    <button class="btn btn-danger btn-sm" x-on:click="logout" x-show="isLoggedIn">
+                                    <button class="btn btn-danger btn-sm" x-on:click="logout">
                                         Logout
                                     </button>
                                 </div>
@@ -70,14 +70,13 @@
                 <div class="cart" x-cloak>
                     <div x-show="!isLoggedIn"
                         style="text-align: center; color: #5c0808; font-weight: bold; margin-top:10em;">
-                        <h3 x-show="!isLoggedIn">Please Enter Your Username</h3>
+                        <h3>Please Enter Your Username</h3>
 
-                        <input x-show="!isLoggedIn" type="text" placeholder="Enter Username" x-model="username">
-                        <button x-on:click="login" x-show="!isLoggedIn && username"
+                        <input type="text" placeholder="Enter Username" x-model="username">
+                        <button x-on:click="login" id="name" name="name" maxlength="8" size="10" 
                             style="margin-top: 10px; margin-left: 10px; background-color: #0b2ab7; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
                             Login
                         </button>
-
                     </div>
 
 
